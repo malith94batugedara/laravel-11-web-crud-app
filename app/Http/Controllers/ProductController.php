@@ -56,17 +56,30 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(Product $product,$product_id)
     {
-        //
+        $productt = $product::find($product_id);
+        return view('products.edit',compact('productt'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product,$product_id)
     {
-        //
+         $data = $request->validated();
+
+         $producttt = $product::find($product_id);
+
+         $producttt->product_name = $data['pro_name'];
+
+         $producttt->product_price = $data['pro_price'];
+
+         $producttt->product_id = $data['pro_id'];
+
+         $producttt->update();
+
+         return redirect(route('product.index'))->with('status','Product Updated Successfully!');
     }
 
     /**

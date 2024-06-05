@@ -34,7 +34,7 @@
                     <td>{{$product->product_price}}</td>
                     <td>{{$product->product_id}}</td>
                     <td>
-                        <a href="" class="btn btn-success">Edit</a>
+                        <a href="{{ route('product.edit',$product->id) }}" class="btn btn-success">Edit</a>
                         <a href="" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
