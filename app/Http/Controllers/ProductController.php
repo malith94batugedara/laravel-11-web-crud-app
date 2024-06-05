@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -85,8 +86,13 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product,Request $request)
     {
-        //
+        $productt=$product::findOrFail($request->product_delete_id);
+
+        $productt->delete();
+
+        return redirect(route('product.index'))->with('status','Product Deleted Successfully');
+       
     }
 }
